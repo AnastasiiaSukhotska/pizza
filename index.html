@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+	*{
+		margin: 0;
+		padding: 0;
+		color: darkred;
+	}
+
+	body{
+		
+	}
+		.container{
+
+			width: 100%;
+			height: 100vh;
+			display: flex;
+			flex-wrap: nowrap;
+			background-color: #FFEDCA;
+			align-items: stretch;
+
+		}
+
+
+		.leftbar{
+			display: flex;
+			flex-grow: 1;
+			margin-left: 20px;
+			border: 2px solid darkred;
+			box-shadow: 2px 2px 2px darkred;
+			justify-content: start;
+			flex-direction: column;
+			background-color: #FFE3AE;
+			
+
+		}
+
+
+		.pizza-area{
+			flex-grow: 5;
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
+			padding-top: 30px;
+			
+
+		}
+
+		.ingredient{
+			width: 70px;
+			height: 70px;
+			background-size: contain;
+			background-repeat: no-repeat;
+			margin: 20px auto;
+			position: relative;
+			
+		}
+
+
+
+
+		.ingredient.mushroom{
+			background-image: url(img/mushroom.png);
+
+
+			
+		}
+		.cheese{
+			background-image: url(img/cheese.png);
+	
+		}
+
+
+		.paperoni{
+			background-image: url(img/paperoni.png);
+			
+		}
+		.bacon{
+			background-image: url(img/bacon.png);
+			
+		}
+
+		.pizza{
+			width: 300px;
+			height: 300px;
+			background-image: url(img/osnova.png);
+			background-size: contain;
+			margin: 0 auto;
+			margin-top: 50px;
+			position: relative;
+		}
+		.price{
+			margin: 0 auto;
+			width: 100%;
+			text-align: center;
+			color: #FFE3AE;
+			background-color: darkred;
+			height: 20px;
+			box-shadow: 1px 1px 2px darkred;
+			
+		}
+
+		.mushroom .price{
+			padding-top: 70px;
+		}
+
+
+		.souces{
+			display: flex;
+			justify-content: center;
+			margin-top: 20px;
+			align-items: center;
+		}
+
+
+
+		label{
+			margin-right: 20px;
+			padding-left: 10px;
+			font-size: 20px;
+		}
+
+		h1{
+			font-size: 30px;
+			font-weight: bold;
+			text-shadow: 1px 1px 3px darkred;
+			margin: 0 auto;
+
+		}
+
+		.btn{
+			width: 100px;
+			height: 40px;
+			margin: 0 auto;
+			padding: 5px;
+			margin-top: 20px;
+			background-color: darkred;
+			color: #FFEDCA;
+			outline: none;
+			border: none;
+			border-radius: 10px;
+			box-shadow: 1px 1px 2px black;
+		}
+		.recipe-screen{
+			display: none;
+			width: 100%;
+			height: 100%;
+			background-color: #FFEDCA;
+			position: absolute;
+			
+		}
+		.recipe-screen__recipe{
+			width: 300px;
+			height: 500px;
+			position: absolute;
+			background-color: #FFEDCA;
+			left: 35%;
+			top: 100px;
+			border: 2px solid darkred;
+			box-shadow: 1px 1px 2px darkred;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+		}
+		
+
+		.recipe__list_ingredients-elem{
+			display: flex;
+			
+			
+		}
+
+		.recipe__list_ingredients-elem div{
+			width: 75px;
+			padding: 5px;
+			box-sizing: border-box;
+			border: 1px solid darkred;
+			box-shadow: 1px 1px 2px darkred;
+		}
+
+
+		.recipe__list_souces-elem{
+			display: flex;
+			justify-content: space-between;
+			
+
+	
+		}
+
+		.recipe__list_souces-elem div{
+			box-shadow: 1px 1px 2px darkred;
+			border: 1px solid darkred;
+			width: 150px;
+			padding: 0 10px;
+			box-sizing: border-box;
+		}
+
+		.recipe__list_total-price, .recipe__header{
+			display: flex;
+			background-color: darkred;
+			line-height: 30px;
+			font-size: 20px;
+			color: #FFEDCA;
+			justify-content: center;
+
+		}
+
+
+
+	</style>
+	<script src="js/script.js">
+	</script>
+</head>
+<body>
+<div class="container">
+	<div class="leftbar">
+		<div class="mushroom ingredient" data-price="5" data-name="Muchroom">
+			
+		</div>
+		<div class="price">5</div>
+		<div class="cheese ingredient" data-price="10" data-name="Cheese">
+		</div>
+		<div class="price">15</div>
+		<div class="bacon ingredient" data-price="15" data-name="Bacon">
+			
+		</div>
+		<div class="price">15</div>
+		<div class="paperoni ingredient" data-price="15" data-name="Paperoni">	
+		</div>
+		<div class="price">15</div>
+	</div>
+	<div class="pizza-area">
+		<h1>Выбери свою пиццу</h1>
+		<div class="pizza"></div>
+		<div class="souces">
+			<input type="checkbox" value="Ketchup" id="ketchup" class="souce" data-name="ketchup" data-price="7">
+			<label for="ketchup">Кетчуп</label>
+			<input type="checkbox" value="Meyo" id="meyo" class="souce" data-name="meyo" data-price="5">
+			<label for="meyo">Майонез</label>
+		</div>
+		<button class="btn">Rreceipt</button>
+	</div>
+	
+</div>
+<div class="recipe-screen">
+		<div class="recipe-screen__recipe">
+			<h2 class="recipe__header">Your receipt</h2>
+			
+			<div class="recipe__list_ingredients">
+				<div class="recipe__list_headers recipe__list_ingredients-elem">
+				<div>Ingredient</div>
+				<div>Quantity</div>
+				<div>Price</div>
+				<div>Total</div>
+			</div>
+			</div>
+			<div class="recipe__list_souces"></div>
+			<div class="recipe__list_total-price"></div>
+		</div>
+	</div>
+</body>
+</html>
