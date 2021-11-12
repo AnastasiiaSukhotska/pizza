@@ -88,6 +88,7 @@
 			width: 300px;
 			height: 300px;
 			background-image: url(img/osnova.png);
+			background-repeat: no-repeat;
 			background-size: contain;
 			margin: 0 auto;
 			margin-top: 50px;
@@ -124,13 +125,16 @@
 			font-size: 20px;
 		}
 
-		h1{
+		h1, .current-price{
 			font-size: 30px;
 			font-weight: bold;
 			text-shadow: 1px 1px 3px darkred;
 			margin: 0 auto;
 
+
 		}
+
+
 
 		.btn{
 			width: 100px;
@@ -242,6 +246,7 @@
 			<input type="checkbox" value="Meyo" id="meyo" class="souce" data-name="meyo" data-price="5">
 			<label for="meyo">Майонез</label>
 		</div>
+		<div class="current-price">Current price: 0</div>
 		<button class="btn">Rreceipt</button>
 	</div>
 	

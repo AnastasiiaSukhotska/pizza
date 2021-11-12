@@ -26,6 +26,8 @@ class Point{
 			addQuantity(){
 				return this.quantity=parseInt(this.quantity)+1;
 			}
+
+
 		}
 		let pizza;
 		let dragTarget=null;
@@ -34,6 +36,7 @@ class Point{
 		let ingredient;
 		let recipeElemArea;
 		let souces=[];
+		let currentPrice=0;
 		function getPizzaCentre(){
 			let rect=pizza.getBoundingClientRect();
 			let cx=rect.left+rect.width/2;
@@ -57,11 +60,8 @@ class Point{
 			let rect=pizza.getBoundingClientRect();
 			return new Point(mousePos.x-rect.x, mousePos.y-rect.y);
 		}
-		function addIngredient(dragTarget){
-			ingredient=new Ingredient(dragTarget.dataset.name, '1', dragTarget.dataset.price);
-			ingredients.push(ingredient);
-			console.log(ingredients);
-		}
+
+
 
 		function createRecipeElem(ingredient){
 			let recipeIngredArea=document.querySelector('.recipe__list_ingredients');
@@ -101,8 +101,14 @@ class Point{
 		let sum=0;
 
 		function countTotalPrice(ingredient){
-			 sum+=parseInt(ingredient.price)*parseInt(ingredient.quantity);
+			 sum+=parseInt(ingredient.price);
 			return sum;
+		}
+		function createCurrentPriceElem(sum){
+			currentPrice=document.querySelector('.current-price');
+			currentPrice.innerHTML='';
+			currentPrice.append("Current price: "+sum);
+			return currentPrice;
 		}
 
 		function addRecipeElem(ingredient){
@@ -110,6 +116,8 @@ class Point{
 							ingredients=[];
 							ingredient=new Ingredient(dragTarget.dataset.name, '1', dragTarget.dataset.price);
 							ingredients.push(ingredient);
+							countTotalPrice(ingredient);
+							
 						}
 						else{
 						let index=ingredients.findIndex((e,i)=>
@@ -117,9 +125,12 @@ class Point{
 						if(index==-1) {
 							ingredient=new Ingredient(dragTarget.dataset.name, '1', dragTarget.dataset.price);
 							ingredients.push(ingredient);
+							countTotalPrice(ingredient);
 							return ingredients;
 						}
 						else ingredients[index].addQuantity();
+						countTotalPrice(ingredients[index]);
+						
 						}
 		}
 
@@ -153,6 +164,7 @@ class Point{
 						pizza.append(dragTarget);
 						dragTarget.style.position='absolute';
 						addRecipeElem(dragTarget);
+						createCurrentPriceElem(sum);
 						dragTarget=null;
 						
 					}else {
@@ -167,11 +179,15 @@ class Point{
 					if(checkbox.checked){
 						ingredient=new Ingredient(checkbox.dataset.name, '1', checkbox.dataset.price);
 						souces.push(ingredient);
+						countTotalPrice(ingredient);
+						createCurrentPriceElem(sum);
 					}
 					else {
-						let index=souces.findIndex((e,i)=>
-							souces[i].name==checkbox.dataset.name);
-						souces.splice(index, index);
+						let index=souces.findIndex((e,i)=>souces[i].name==checkbox.dataset.name);
+						sum-=parseInt(souces[index].price);
+						createCurrentPriceElem(sum);
+						souces.splice(index, 1);
+						
 					}
 						
 				}
@@ -184,10 +200,8 @@ class Point{
 					let recipeScreen=document.querySelector('.recipe-screen');
 					recipeScreen.style.display='flex';
 					ingredient=new Ingredient('Base', '1', '10');
+					countTotalPrice(ingredient);
 					ingredients.unshift(ingredient);
-					let allIngredients=ingredients.concat(souces);
-					console.log=(allIngredients);
-					allIngredients.forEach(i=>countTotalPrice(i));
 					ingredients.map(i=>createRecipeElem(i));
 					souces.map(i=>createRecipeElemSouce(i));
 					let recipeTotalSum=document.querySelector('.recipe__list_total-price');
